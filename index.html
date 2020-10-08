@@ -1,0 +1,299 @@
+<!Doctype HTML>
+<html lang="en">
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title> responsiveness </title>
+ </head>
+<body>
+<nav>
+<ul id="ul-nav">
+<li><a href="#">Home</a></li>
+<li><a href="#">Artworks</a></li>
+<li><a href="#">Our specialists</a></li>
+<li><a href="#">FAQ</a></li>
+<li><a href="#">Testimonials</a></li>
+<li><a href="#">Find us</a></li>
+</nav>
+<section>
+<div id="container-one">
+<h4>This is container one</h4>
+<button id="btn-more">Increase height</button>
+<button id="btn-less">Decrease height</button>
+</div>
+<div id="container-two">
+<h4>This is container two</h4>
+<div id="box-absolute-container"><p>i'm absolute div ;)</p></div>
+<label for="toggler" id="toggler-label" style="font-size: 0.8rem;">Check the toggler to display some &lt;li&gt;</label>
+<br>
+<input type='checkbox' id='toggler'>
+<ul id='ul-container-two'></ul>
+</div>
+<div id="container-three">
+  <h4>This is container three</h4>
+  <button id="btn-get-imgs">Get images!</button>
+  <ul id="ul-container-three"></ul>
+  </div>
+<div id="box-absolute-section"><p>i'm absolute div ;)</p></div>
+</section>
+<footer>
+<label for="input-name">Enter first name</label>
+<input type="text" id="input-name">
+<label for="input-lastname">Enter last name</label>
+<input type="text" id="input-lastname">
+<label for="input-name">Leave your email</label>
+<input type="email" id="input-email">
+<textarea placeholder="Share your comments"></textarea>
+<input type="submit" id="submit" value="Submit">
+</footer>
+<style>
+*{
+  padding: 0;
+  margin: 0;
+}
+
+html {
+min-width: fit-content;
+max-width: 100%;
+min-height: 100%;
+max-height: fit-content;
+border: 0.5px red solid;
+}
+
+body {
+min-width: inherit;
+max-width: inherit;
+min-height: inherit;
+max-height: inherit;
+position: relative;
+}
+
+
+#ul-nav li{
+list-style-type: none;
+}
+
+#ul-nav {
+  min-height: 10vh;
+  height: fit-content;
+text-align: center;
+display: flex;
+justify-content: space-evenly;
+align-items: center;
+}
+
+a{
+text-decoration: none;
+color: #333;
+}
+
+a:hover{
+color: rgba(227, 11, 40, 0.8);
+transition: all ease 1s;
+}
+
+section{
+background-color: rgba(0,0,0,0.1);
+display: flex;
+min-height: 100vh; 
+max-height: fit-content;
+position: relative;
+}
+
+#container-one{
+position: relative;
+border: 0.5px olive dotted;
+height: fit-content;
+flex: 1;
+}
+
+#container-two{
+position: relative;
+border: 0.5px pink dotted;
+height: fit-content;
+flex: 1;
+text-align: center;
+}
+
+#container-three{
+position: relative;
+border: 0.5px springgreen dotted;
+height: fit-content;
+flex: 2;
+text-align: center;
+}
+
+#toggler{
+width: 24px;
+height: 24px;
+}
+
+
+
+/*absolute positioning*/
+#box-absolute-container{
+width: 70px;
+height: 70px;
+text-align: center;
+background-color: yellow;
+font-size: 0.9rem;
+position: absolute;
+left: 1%;
+top: 50%;
+opacity: 0.3;
+}
+#box-absolute-section{
+width: 70px;
+height: 70px;
+text-align: center;
+background-color: olive;
+font-size: 0.9rem;
+position: absolute;
+top: 50%;
+right: 1%;
+opacity: 0.8;
+}
+
+
+footer{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display:inline-flex;
+  min-height: 5vh;
+  height: fit-content;
+}
+
+footer input, footer label, footer textarea{
+  margin-left: 1rem;
+}
+
+textarea{
+max-height: 100px;
+max-width: 200px;
+}
+
+</style>
+
+<script>
+//experimental positioning
+// const section = document.querySelector('section');
+// const boxInSection = document.querySelector('#box-absolute-section');
+// boxInSection.style.top = `${window.getComputedStyle(section).height/2}px`
+// console.log(section.clientHeight/2)
+
+const containerOne = document.querySelector('#container-one');
+const list = document.querySelector('#ul-container-two');
+const toggler = document.querySelector('#toggler');
+const btnMore = document.querySelector('#btn-more');
+const btnLess = document.querySelector('#btn-less');
+const togglerLabel = document.querySelector('#toggler-label');
+const para = document.createElement('p');
+containerOne.appendChild(para);
+para.style.fontSize = '0.9rem';
+para.style.backgroundColor = 'rgba(207, 207, 207, 0.5)';
+para.style.color = '#333';
+
+//containerOne.style.maxWidth = '300px';
+
+
+window.addEventListener('load',()=>{
+para.innerHTML = `Window width: ${window.getComputedStyle(containerOne).width}` + "<br/>" + `Window height: ${window.getComputedStyle(containerOne).height}`;
+})
+
+window.addEventListener('resize',()=>{
+para.innerHTML = `Window width: ${window.getComputedStyle(containerOne).width}` + "<br/>" + `Window height: ${window.getComputedStyle(containerOne).height}`;
+})
+console.log(containerOne.clientHeight)
+
+btnMore.addEventListener('click',()=>{
+const br = document.createElement('br');
+containerOne.appendChild(br);
+checkStatus()
+})
+
+function checkStatus(){
+if(containerOne.childNodes[8]){
+btnLess.disabled = false;
+}else{
+btnLess.disabled = true;
+}
+}
+checkStatus()
+
+btnLess.addEventListener('click',()=>{
+containerOne.removeChild(containerOne.childNodes[8]);
+checkStatus()
+})
+
+toggler.addEventListener('click',()=>{
+if(toggler.checked === true){
+togglerLabel.innerHTML = 'Unheck the toggler to hide its content';
+let i = 0;
+while(i<50){
+i++;
+const listItem = document.createElement('li');
+listItem.innerHTML = `this is listItem No ${i}`;
+list.appendChild(listItem);
+}
+}else{
+togglerLabel.innerHTML = 'Check the toggler to display some &lt;li&gt';
+while(list.firstChild){
+list.removeChild(list.firstChild)
+}
+}
+}
+)
+
+const containerThree = document.querySelector("#container-three");
+      const listImgs = document.querySelector("#ul-container-three");
+      const btnGetImgs = document.querySelector("#btn-get-imgs");
+      const myArray = [
+        "320464.png",
+        "320468.png",
+        "320469.png",
+        "320471.png",
+        "320482.png",
+      ];
+      let urlBase = "./imgs/";
+        btnGetImgs.addEventListener("click", () => {
+          if(btnGetImgs.innerHTML === 'Get images!'){
+            btnGetImgs.innerHTML = 'Hide images!'
+        while (listImgs.firstChild) {
+          listImgs.removeChild(listImgs.firstChild);
+        }
+      for (let i = 0; i < myArray.length; i++) {
+          fetch(`${urlBase}${myArray[i]}`)
+            .then((response) => {
+              if (!response.ok) {
+                throw console.log("Fetching problem has occured!");
+              } else {
+                return response.blob();
+              }
+            })
+            .then((blob) => {
+              let objectURL = URL.createObjectURL(blob);
+              let image = document.createElement("img");
+              image.src = objectURL;
+              const listItemImg = document.createElement("li");
+              listItemImg.style.listStyleType = "none";
+              listImgs.appendChild(listItemImg);
+              listItemImg.appendChild(image);
+            })
+            .catch((e) => {
+              `Fetching problem:${e}`;
+            });
+        }
+          } else{
+            btnGetImgs.innerHTML = 'Get images!'
+            while (listImgs.firstChild) {
+          listImgs.removeChild(listImgs.firstChild);
+        }
+        }
+      });
+
+     
+</script>
+</body>
+<html>
